@@ -6,7 +6,7 @@ Prints a horizontal histogram of word lengths in an input */
 
 #define IN          1  /* inside a word */
 #define OUT         0  /* outside a word */
-#define MAXLENGTH   9 /* maximum discretely handled length */
+#define MAXLENGTH   9  /* maximum discretely handled length */
 
 int main()
 {
