@@ -50,6 +50,8 @@ int main()
         }
     }
 
+    /* actually do the printing of the histogram - note that this does not do any scaling right now,
+       so things could run over to the next line... */
     for (i = 0; i < MAXLENGTH; ++i)
     {
         printf("%c  :", '1' + i);
