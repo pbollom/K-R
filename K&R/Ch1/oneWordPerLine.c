@@ -1,4 +1,4 @@
-/* Author: Patrick Bollom
+/* Author: pbollom
 Date: 2020-04-27
 Description:
 K&R 1-12 write the input with one word per line */

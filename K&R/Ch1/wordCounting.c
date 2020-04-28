@@ -1,4 +1,4 @@
-/* Author: Patrick Bollom
+/* Author: pbollom
 Date: 2020-04-27
 Description:
 Counts lines, words, and characters in input */  

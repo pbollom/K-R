@@ -1,4 +1,4 @@
-/* Author: Patrick Bollom
+/* Author: pbollom
 Date: 2020-04-26
 Description:
 K&R 1-4 Writes a table of temperature conversions from Celsius to Fahrenheit on the screen */  

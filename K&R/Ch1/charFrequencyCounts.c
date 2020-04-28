@@ -1,4 +1,4 @@
-/* Author: Patrick Bollom
+/* Author: pbollom
 Date: 2020-04-28
 Description:
 Count the frequency of digits, white space, and other characters */

@@ -1,4 +1,4 @@
-/* Author: Patrick Bollom
+/* Author: pbollom
 Date: 2020-04-26
 Description:
 Writes the words "Hello World" on the screen */  

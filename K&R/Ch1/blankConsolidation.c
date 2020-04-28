@@ -1,4 +1,4 @@
-/* Author: Patrick Bollom
+/* Author: pbollom
 Date: 2020-04-26
 Description:
 K&R 1-9 Consolidates multiple blanks into a single blank */  
