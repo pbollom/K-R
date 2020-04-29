@@ -1,5 +1,5 @@
 /* Author: pbollom
-Date: 2020-04-28
+Date: 2020-04-29
 Description:
 K&R 1-13 Prints a horizontal histogram of character frequencies in an input.
 Will only print characters that appeared, and newline and tab are the only
