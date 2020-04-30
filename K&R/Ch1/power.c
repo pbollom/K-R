@@ -1,5 +1,5 @@
 /* Author: pbollom
-Date: 2020-04-29
+Date: 2020-04-30
 Description:
 First function example - computes a positive power of an integer */  
 #include<stdio.h>
