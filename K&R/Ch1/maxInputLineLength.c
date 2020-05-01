@@ -1,24 +1,31 @@
 /* Author: pbollom
 Date: 2020-05-01
 Description:
-Finds the length of the longest line in the input */  
+1-16 Finds the length of the longest line in the input
+Prints up to the first 999 characters of that input */  
 #include<stdio.h>
 
 #define MAXLINE 1000 /* maximum line length */
 
 int gtline(char line[], int maxline);
 void copy(char from[], char to[]);
+int gtremaininglen();
 
 int main()
 {
     int len;    /* current line length */
     int max;    /* current maximum line length */
     char line[MAXLINE];     /* current input line */
-    char longest[MAXLINE]; /* maximum saved input line */
+    char longest[MAXLINE];  /* maximum saved input line */
 
     max = 0;
     while ((len = gtline(line, MAXLINE)) > 0)
     {
+        if (len == MAXLINE - 1 && line[MAXLINE - 2] != '\n') /* we hit the maximum and it was not terminated by a newline */
+        {
+            len = len + gtremaininglen(); /* the actual length of the line */
+        }
+
         if (len > max)
         {
             max = len;
@@ -47,6 +54,20 @@ int gtline(char s[], int lim)
         ++i;
     }
     s[i] = '\0';
+    return i;
+}
+
+int gtremaininglen()
+{
+    int c, i;
+
+    i = 0;
+    while ((c = getchar()) != '\n')
+    {
+        ++i;
+    }
+    ++i; /* add the extra character for the newline */
+
     return i;
 }
 
