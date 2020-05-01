@@ -57,6 +57,7 @@ int gtline(char s[], int lim)
     return i;
 }
 
+/* when gtline returns an incomplete line, this is used to get the remaining length of that line */
 int gtremaininglen()
 {
     int c, i;
