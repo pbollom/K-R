@@ -1,5 +1,5 @@
 /* Author: pbollom
-Date: 2020-05-01
+Date: 2020-05-02
 Description:
 1-17 Prints the content of all lines longer than 80 characters */  
 #include<stdio.h>
