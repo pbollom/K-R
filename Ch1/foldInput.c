@@ -1,7 +1,7 @@
 /* Author: pbollom
 Date: 2020-05-04
 Description:
-1-21 Folds the input into strings of at most length FOLDLENGTH 
+1-22 Folds the input into strings of at most length FOLDLENGTH 
 Right now this is incorrect because it doesn't handle non-space blanks
 and it doesn't fold after the last non-blank character - it just folds on 
 the blank. Also, the input length is locked to one too small right now. */  

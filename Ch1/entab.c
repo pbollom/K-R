@@ -1,7 +1,7 @@
 /* Author: pbollom
 Date: 2020-05-03
 Description:
-1-20 Replaces strings of blanks in the input with the minimum number of spaces or tabs
+1-21 Replaces strings of blanks in the input with the minimum number of spaces or tabs
 to achieve the same spacing. */  
 #include<stdio.h>
 
