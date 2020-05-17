@@ -1,6 +1,7 @@
 /* Author: pbollom
 Date: 2020-05-17
-Description: 2-8 *** */
+Description: 2-8 Rotate bits to the right by a specified amount, contained within
+             the input number of bits (so a five-bit number will always be five bits) */
 #include<stdio.h>
 
 int rightrot(unsigned x, int n);
