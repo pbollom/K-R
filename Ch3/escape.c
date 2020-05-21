@@ -2,7 +2,7 @@
 Date: 2020-05-21
 Description: 3-2 Copies an input string from one array to another, making escaped characters
              visible, then reverting them. Prints both output strings. Currently only handles
-             tab and newline characters. */
+             tab, newline, and backslash escaped characters. */
 #include<stdio.h>
 
 #define MAXINPUT    1000 /* maximum input length */
@@ -52,6 +52,10 @@ void escape(char s[], char t[])
                 t[j++] = '\\';
                 t[j++] = 't';
                 break;
+            case '\\':
+                t[j++] = '\\';
+                t[j++] = '\\';
+                break;
             default:
                 t[j++] = c;
                 break;
@@ -72,8 +76,7 @@ void unescape(char t[], char s[])
         switch (c)
         {
             case '\\':
-                c = t[i++];
-                switch (c)
+                switch (t[i++])
                 {
                     case 't':
                         s[j++] = '\t';
@@ -81,8 +84,9 @@ void unescape(char t[], char s[])
                     case 'n':
                         s[j++] = '\n';
                         break;
-                    default:
-                        s[j++] = '\0'; /* just terminate the string */
+                    case '\\':
+                        s[j++] = '\\';
+                        break;
                 }
                 break;
             default:
