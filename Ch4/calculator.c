@@ -10,6 +10,8 @@ Description: A reverse polish calculator */
 int getop(char[]);
 void push(double);
 double pop(void);
+double peek(void);
+void clear(void);
 
 int main()
 {
@@ -59,6 +61,12 @@ int main()
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
+            case 'm':
+                printf("\t%.8g\n", peek());
+                break;
+            case 'c':
+                clear();
+                break;
             default:
                 printf("error: unknown command %s\n", s);
                 break;
@@ -98,6 +106,26 @@ double pop()
         printf("error: stack empty\n");
         return 0.0;
     }
+}
+
+/* peek: return the top value from the stack without removing it */
+double peek()
+{
+    if (sp > 0)
+    {
+        return val[sp - 1];
+    }
+    else
+    {
+        printf("error: stack empty\n");
+        return 0.0;
+    }   
+}
+
+/* clear: reset the stack */
+void clear()
+{
+    sp = 0;
 }
 
 #include <ctype.h>
