@@ -1,6 +1,17 @@
 /* Author: pbollom
 Date: 2020-05-24
-Description: A reverse polish calculator */
+Description: A reverse polish calculator
+             Some commands:
+                +: add
+                -: substract
+                *: multiply
+                /: divide
+                %: modulous
+                ?: peek the top value of the stack
+                ~: clear the current stack of values
+                ": duplicate the top value of the stack
+                ;: flip the top two values on the stack 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,7 +27,7 @@ void clear(void);
 int main()
 {
     int type;
-    double op2;
+    double op2, op3;
     char s[MAXOP];
 
     while ((type = getop(s)) != EOF)
@@ -61,11 +72,20 @@ int main()
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
-            case 'm':
+            case '?':
                 printf("\t%.8g\n", peek());
                 break;
-            case 'c':
+            case '~':
                 clear();
+                break;
+            case '"':
+                push(peek());
+                break;
+            case ';':
+                op2 = pop();
+                op3 = pop();
+                push(op2);
+                push(op3);
                 break;
             default:
                 printf("error: unknown command %s\n", s);
