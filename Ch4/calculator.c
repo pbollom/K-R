@@ -110,16 +110,17 @@ int getop(char s[])
 {
     int i, c;
 
+    /* strip off the leading whitespace and optional plus sign */
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
     s[1] = '\0';
-    if (!isdigit(c) && c != '.')
+    if (!isdigit(c) && c != '.' && c != '-')
     {
         return c; /* not a number */
     }
-    
+
     i = 0;
-    if (isdigit(c)) /* integer part */
+    if (isdigit(c) || c == '-') /* integer part */
     {
         while (isdigit(s[++i] = c = getch()))
             ;
@@ -134,6 +135,11 @@ int getop(char s[])
     {
         ungetch(c);
     }
+    if (i == 1 && s[0] == '-') /* special case, we really just read a minus sign */
+    {
+        return '-';
+    }
+
     return NUMBER;
 }
 
