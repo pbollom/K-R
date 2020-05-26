@@ -17,6 +17,10 @@ Description: A reverse polish calculator
 
 #define MAXOP   100 /* maximum size of operand or operator */
 #define NUMBER  '0' /* signal that a number was found */
+#define DUP     -2
+#define PEEK    -3
+#define CLEAR   -4
+#define FLIP    -5
 
 int getop(char[]);
 void push(double);
@@ -72,16 +76,16 @@ int main()
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
-            case '?':
+            case PEEK:
                 printf("\t%.8g\n", peek());
                 break;
-            case '~':
+            case CLEAR:
                 clear();
                 break;
-            case '"':
+            case DUP:
                 push(peek());
                 break;
-            case ';':
+            case FLIP:
                 op2 = pop();
                 op3 = pop();
                 push(op2);
@@ -150,6 +154,7 @@ void clear()
 
 #include <ctype.h>
 
+int ismulticharacterop(char op[], int n);
 int getch(void);
 void ungetch(int);
 
@@ -164,7 +169,30 @@ int getop(char s[])
     s[1] = '\0';
     if (!isdigit(c) && c != '.' && c != '-')
     {
-        return c; /* not a number */
+        ungetch(c);
+
+        if (ismulticharacterop("peek", 4))
+        {
+            return PEEK;
+        }
+
+        if (ismulticharacterop("clear", 5))
+        {
+            return CLEAR;
+        }
+
+        if (ismulticharacterop("dup", 3))
+        {
+            return DUP;
+        }
+
+        if (ismulticharacterop("flip", 4))
+        {
+            return FLIP;
+        }
+        
+        getch();  /* what we want is already stored in c */
+        return c; /* not a number or a special non-number operator */
     }
 
     i = 0;
@@ -191,9 +219,31 @@ int getop(char s[])
     return NUMBER;
 }
 
+int ismulticharacterop(char op[], int oplength)
+{
+    int i, c, done;
+
+    i = 0;
+    while (i < oplength)
+    {
+        if ((c = getch()) != op[i])
+        {
+            ungetch(c);
+            i--;
+            while (i >= 0)
+            {
+                ungetch(op[i--]);
+            }
+            return 0;
+        }
+        i++;
+    }
+    return 1;
+}
+
 #define BUFSIZE 100
 
-char buf[BUFSIZE];  /* buffer for ungetch */
+int buf[BUFSIZE];  /* buffer for ungetch */
 int bufp = 0;       /* next free position in buf */
 
 /* getch: get a (possibility pushed back) character */
