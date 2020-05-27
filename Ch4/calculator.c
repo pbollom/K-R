@@ -1,26 +1,39 @@
 /* Author: pbollom
 Date: 2020-05-24
 Description: A reverse polish calculator
-             Some commands:
+             Some (case-sensitive) commands:
                 +: add
                 -: substract
                 *: multiply
                 /: divide
                 %: modulous
-                ?: peek the top value of the stack
-                ~: clear the current stack of values
-                ": duplicate the top value of the stack
-                ;: flip the top two values on the stack 
+                peek: peek the top value of the stack
+                clear: clear the current stack of values
+                dup: duplicate the top value of the stack
+                flip: flip the top two values on the stack 
+                sin: sine
+                cos: cosine
+                tan: tanangent
+                pow: x^y
+                exp: e^x
+                sqrt: square root
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define MAXOP   100 /* maximum size of operand or operator */
 #define NUMBER  '0' /* signal that a number was found */
-#define DUP     -2
-#define PEEK    -3
-#define CLEAR   -4
-#define FLIP    -5
+#define DUP     EOF > 0 ? EOF + 1 : EOF - 1
+#define PEEK    EOF > 0 ? EOF + 2 : EOF - 2
+#define CLEAR   EOF > 0 ? EOF + 3 : EOF - 3
+#define FLIP    EOF > 0 ? EOF + 4 : EOF - 4
+#define SIN     EOF > 0 ? EOF + 5 : EOF - 5
+#define COS     EOF > 0 ? EOF + 6 : EOF - 6
+#define TAN     EOF > 0 ? EOF + 7 : EOF - 7
+#define POW     EOF > 0 ? EOF + 8 : EOF - 8
+#define EXP     EOF > 0 ? EOF + 9 : EOF - 9
+#define SQRT    EOF > 0 ? EOF + 10 : EOF - 10
 
 int getop(char[]);
 void push(double);
@@ -90,6 +103,25 @@ int main()
                 op3 = pop();
                 push(op2);
                 push(op3);
+                break;
+            case SIN:
+                push(sin(pop()));
+                break;
+            case COS:
+                push(cos(pop()));
+                break;
+            case TAN:
+                push(tan(pop()));
+                break;
+            case POW:
+                op2 = pop();
+                push(pow(pop(), op2));
+                break;
+            case EXP:
+                push(exp(pop()));
+                break;
+            case SQRT:
+                push(sqrt(pop()));
                 break;
             default:
                 printf("error: unknown command %s\n", s);
@@ -190,6 +222,36 @@ int getop(char s[])
         {
             return FLIP;
         }
+
+        if (ismulticharacterop("sin", 3))
+        {
+            return SIN;
+        }
+
+        if (ismulticharacterop("cos", 3))
+        {
+            return COS;
+        }
+
+        if (ismulticharacterop("tan", 3))
+        {
+            return TAN;
+        }
+
+        if (ismulticharacterop("pow", 3))
+        {
+            return POW;
+        }
+
+        if (ismulticharacterop("exp", 3))
+        {
+            return EXP;
+        }
+
+        if (ismulticharacterop("sqrt", 4))
+        {
+            return SQRT;
+        }
         
         getch();  /* what we want is already stored in c */
         return c; /* not a number or a special non-number operator */
@@ -219,6 +281,8 @@ int getop(char s[])
     return NUMBER;
 }
 
+/* ismulticharacterop: checks whether the input operator is a specific multi-character string
+                       ensures the input is back in the buffer if it does not match */
 int ismulticharacterop(char op[], int oplength)
 {
     int i, c, done;
